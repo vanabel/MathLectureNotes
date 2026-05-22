@@ -1,0 +1,19 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{1}
+
+\bibitem{DeTurck1983}
+Dennis~M. DeTurck, \emph{Deforming metrics in the direction of their {R}icci
+  tensors}, J. Differential Geom. \textbf{18} (1983), no.~1, 157--162.
+  \MR{697987}
+
+\bibitem{Hamilton1982}
+Richard~S. Hamilton, \emph{Three-manifolds with positive {R}icci curvature}, J.
+  Differential Geometry \textbf{17} (1982), no.~2, 255--306. \MR{664497}
+
+\end{thebibliography}

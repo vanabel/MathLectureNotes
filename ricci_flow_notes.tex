@@ -1,0 +1,495 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper,fontset=none]{ctexart}
+% -------------------------------------------------
+% Configure local Adobe OTF fonts
+% Use the exact file names (if fonts are in the same dir as .tex)
+% or absolute paths: /home/vanabel/fonts/AdobeSongStd-Light.otf
+% -------------------------------------------------
+
+% --- Serif (Songti) ---
+\setCJKmainfont[
+  BoldFont      = AdobeHeitiStd-Regular.otf,
+  ItalicFont    = AdobeKaitiStd-Regular.otf,
+  BoldItalicFont= AdobeHeitiStd-Regular.otf  % Heiti as bold italic fallback
+]{AdobeSongStd-Light.otf}
+
+% --- Sans Serif (Heiti) ---
+\setCJKsansfont{AdobeHeitiStd-Regular.otf}
+
+% --- Monospace / Typewriter (Fangsong) ---
+\setCJKmonofont{AdobeFangsongStd-Regular.otf}
+
+% -------------------------------------------------
+% Alternative: If fonts are in a dedicated directory,
+% use the Path option:
+% -------------------------------------------------
+% \setCJKmainfont[
+%   Path          = /home/vanabel/fonts/,
+%   BoldFont      = AdobeHeitiStd-Regular.otf,
+%   ItalicFont    = AdobeKaitiStd-Regular.otf,
+%   ...
+% ]{AdobeSongStd-Light.otf}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage[backref=page]{hyperref}
+\usepackage{cleveref}
+\usepackage{mathrsfs}
+\usepackage{bm}
+\usepackage{tikz-cd}
+\geometry{margin=2.6cm}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{thm}{定理}[section]
+\newtheorem{prop}[thm]{命题}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{clm}[thm]{断言}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ex}[thm]{例}
+\newtheorem{rmk}[thm]{注}
+\numberwithin{equation}{section}
+
+\newcommand{\Ric}{\operatorname{Ric}}
+\newcommand{\Rm}{\operatorname{Rm}}
+\newcommand{\Scal}{R}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\divg}{\operatorname{div}}
+\newcommand{\Vol}{\operatorname{Vol}}
+\newcommand{\inj}{\operatorname{inj}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\dv}{\,dV_g}
+\newcommand{\Dt}{\partial_t}
+\newcommand{\nabl}{\nabla}
+\newcommand{\norm}[1]{\left\lvert #1\right\rvert}
+\newcommand{\inner}[2]{\left\langle #1,#2\right\rangle}
+
+\title{Ricci Flow 入门笔记\\\large 根据四次课堂笔记整理并补充}
+\author{}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Ricci flow 的基本思想}
+
+设 $M^n$ 为光滑流形，$g$ 为 Riemannian 度量。度量给出切空间上的内积，从而给出长度、角度、体积以及 Levi--Civita 联络 $\nabla$。由 $\nabla$ 的非交换性得到 Riemann 曲率张量 $\Rm$，取迹得到 Ricci 曲率张量 $\Ric$，再取迹得到标量曲率 $R$：
+\[
+  \Ric_{ij}=g^{k\ell}R_{ki\ell j},\qquad R=g^{ij}\Ric_{ij}.
+\]
+Hamilton 的 Ricci flow 是度量空间 $\mathrm{Met}(M)$ 上的几何演化方程
+\begin{equation}\label{eq:RF}
+  \frac{\partial}{\partial t}g(t)=-2\Ric_{g(t)},\qquad g(0)=g_0 .
+\end{equation}
+它的基本思想是：用曲率驱动度量演化，期望在演化过程中几何结构被逐渐 ``平滑化''，从而逼近某种标准几何结构。
+
+\begin{rmk}[为什么是热型方程]
+在局部坐标中，Ricci 张量主部可看成度量的二阶导数。因此形式上有
+\[
+  \partial_t g \sim \Delta g+\text{lower order terms}.
+\]
+严格地说，Ricci flow 不是普通意义下对 $g_{ij}$ 的严格抛物方程，因为它具有微分同胚不变性。Hamilton--DeTurck 方法通过加入适当的 Lie 导数项，将方程规约为严格抛物系统，从而得到短时间存在唯一性。
+\end{rmk}
+
+\begin{thm}[Hamilton~\cite{Hamilton1982}--DeTurck~\cite{DeTurck1983} 短时间存在]
+若 $M^n$ 为闭流形，$g_0\in C^\infty$，则存在 $\varepsilon>0$ 以及唯一的光滑 Ricci flow 解 $g(t)$，$t\in[0,\varepsilon)$，满足 $g(0)=g_0$。
+\end{thm}
+
+\subsection{两个基本例子}
+
+\begin{ex}[圆球]
+设 $(S^n,g_0)$ 是半径为 $r_0$ 的圆球。若写
+\[
+  g(t)=r(t)^2 g_{S^n(1)},
+\]
+则
+\[
+  \Ric_{g(t)}=\frac{n-1}{r(t)^2}g(t).
+\]
+代入 Ricci flow 得
+\[
+  2r(t)r'(t)g_{S^n(1)}=-2(n-1)g_{S^n(1)},
+\]
+即
+\[
+  r'(t)=-\frac{n-1}{r(t)},\qquad
+  r(t)=\sqrt{r_0^2-2(n-1)t}.
+\]
+因此圆球保持圆性，并在有限时间
+\[
+  T=\frac{r_0^2}{2(n-1)}
+\]
+收缩为一点。这体现了 Ricci flow 的尺度性质：时间的量纲等于距离平方。
+\end{ex}
+
+\begin{ex}[Einstein 度量]
+若初始度量 $g_0$ 满足
+\[
+  \Ric_{g_0}=c g_0,
+\]
+并且解保持同伦缩放形式 $g(t)=\lambda(t)g_0$，则 $\Ric_{\lambda g_0}=\Ric_{g_0}=c g_0$ 作为 $(0,2)$ 张量不变。因此
+\[
+  \lambda'(t)g_0=-2c g_0,
+  \qquad \lambda(t)=1-2ct.
+\]
+所以：若 $c>0$，度量有限时间收缩；若 $c=0$，度量静止；若 $c<0$，度量膨胀。归一化到同一尺度后，Einstein 度量是 Ricci flow 的固定点。
+\end{ex}
+
+\section{二维 Ricci flow 与归一化}
+
+当 $n=2$ 时，有
+\[
+  \Ric=\frac{1}{2}R g,
+\]
+故 Ricci flow 化为
+\begin{equation}\label{eq:RF2D}
+  \partial_t g=-R g.
+\end{equation}
+这说明二维 Ricci flow 保持共形类。若写
+\[
+  g(t)=e^{2u(t)}g_0,
+\]
+则
+\[
+  \partial_t g=2u_t e^{2u}g_0=2u_t g,
+\]
+由 \eqref{eq:RF2D} 得
+\[
+  u_t=-\frac{1}{2}R_{g(t)}.
+\]
+同时，二维共形变换下标量曲率满足
+\[
+  R_{e^{2u}g_0}=e^{-2u}\bigl(R_{g_0}-2\Delta_{g_0}u\bigr),
+\]
+因此 $u$ 满足一个标量抛物方程。
+
+为了避免面积在演化中收缩或膨胀，常考虑归一化 Ricci flow
+\begin{equation}\label{eq:NRF}
+  \partial_t g= -2\Ric + \frac{2}{n}r g,
+\end{equation}
+其中
+\[
+  r(t)=\frac{\int_M R_{g(t)}\,dV_{g(t)}}{\int_M dV_{g(t)}}
+\]
+是平均标量曲率。二维时 \eqref{eq:NRF} 变为
+\[
+  \partial_t g=(r-R)g.
+\]
+Hamilton \cite{Hamilton1982} 对曲面 Ricci flow 的研究给出了一种几何化的 uniformization theorem 证明：在归一化 Ricci flow 下，闭曲面度量收敛到常曲率度量。
+
+\section{局部坐标计算与演化公式}
+
+本节整理 Ricci flow 中最常用的局部计算。设 $(x^1,\dots,x^n)$ 为局部坐标，
+\[
+  g_{ij}=g\left(\frac{\partial}{\partial x^i},\frac{\partial}{\partial x^j}\right),
+  \qquad (g^{ij})=(g_{ij})^{-1}.
+\]
+Levi--Civita 联络的 Christoffel 符号为
+\begin{equation}\label{eq:Christoffel}
+  \Gamma^k_{ij}=\frac12 g^{k\ell}\bigl(\partial_i g_{j\ell}+\partial_j g_{i\ell}-\partial_\ell g_{ij}\bigr).
+\end{equation}
+
+\subsection{度量变分下的基本公式}
+
+设 $g(t)$ 为一族度量，并记
+\[
+  h_{ij}=\partial_t g_{ij}.
+\]
+则逆矩阵满足
+\begin{equation}\label{eq:inverse-var}
+  \partial_t g^{ij}=-g^{ik}g^{j\ell}h_{k\ell}=-h^{ij}.
+\end{equation}
+
+\begin{lem}[联络变分公式]\label{lem:connection-var}
+在任意一族度量 $g(t)$ 下，
+\begin{equation}\label{eq:connection-var}
+  \partial_t\Gamma^k_{ij}
+  =\frac12 g^{k\ell}\bigl(\nabla_i h_{j\ell}+\nabla_j h_{i\ell}-\nabla_\ell h_{ij}\bigr).
+\end{equation}
+\end{lem}
+
+\begin{proof}
+等式两端都是 $(1,2)$ 型张量的分量，因此只需在任意点 $p\in M$ 取关于 $g(t)$ 的测地正规坐标验证。此时在 $p$ 点有 $\partial_i g_{jk}=0$ 且 $\Gamma^k_{ij}=0$。对 \eqref{eq:Christoffel} 关于 $t$ 求导，在 $p$ 点得到
+\[
+  \partial_t\Gamma^k_{ij}
+  =\frac12 g^{k\ell}\bigl(\partial_i h_{j\ell}+\partial_j h_{i\ell}-\partial_\ell h_{ij}\bigr).
+\]
+由于 $p$ 点联络系数为零，偏导数可替换为协变导数，得到 \eqref{eq:connection-var}。由张量性，公式在任意坐标中成立。
+\end{proof}
+
+在 Ricci flow 中 $h_{ij}=-2R_{ij}$，故
+\begin{equation}\label{eq:Gamma-RF}
+  \partial_t\Gamma^k_{ij}
+  =-g^{k\ell}\bigl(\nabla_iR_{j\ell}+\nabla_jR_{i\ell}-\nabla_\ell R_{ij}\bigr).
+\end{equation}
+
+\begin{lem}[体积元变分]\label{lem:volume-var}
+若 $h_{ij}=\partial_t g_{ij}$，则
+\begin{equation}\label{eq:volume-var}
+  \partial_t dV_g=\frac12 g^{ij}h_{ij}\,dV_g.
+\end{equation}
+特别地，在 Ricci flow 下，
+\begin{equation}\label{eq:volume-RF}
+  \partial_t dV_g=-R\,dV_g.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+在局部坐标中 $dV_g=\sqrt{\det(g_{ij})}\,dx^1\cdots dx^n$。利用矩阵恒等式
+\[
+  \partial_t\det A=\det A\,\tr(A^{-1}\partial_t A),
+\]
+即得
+\[
+  \partial_t\sqrt{\det g}
+  =\frac12\sqrt{\det g}\,g^{ij}\partial_tg_{ij}.
+\]
+若 $\partial_t g_{ij}=-2R_{ij}$，则 $g^{ij}\partial_tg_{ij}=-2R$，故得到 \eqref{eq:volume-RF}。
+\end{proof}
+
+\subsection{曲率演化公式}
+
+在 Ricci flow 下，有如下基本演化方程：
+\begin{align}
+  \partial_t R_{ijk\ell}
+  &=\Delta R_{ijk\ell}+Q_{ijk\ell}(\Rm),\label{eq:Rm-evol}\\
+  \partial_t R_{ij}
+  &=\Delta R_{ij}+2R_{ikj\ell}R^{k\ell}-2R_{ik}R^k{}_j,\label{eq:Ric-evol}\\
+  \partial_t R
+  &=\Delta R+2\norm{\Ric}^2.\label{eq:scalar-evol}
+\end{align}
+这里 $Q(\Rm)$ 是曲率张量的二次项，具体形式依赖曲率符号约定。最常用的是标量曲率方程 \eqref{eq:scalar-evol}，它显示 $R$ 满足带有非负反应项的热方程。
+
+\begin{rmk}[Lichnerowicz Laplacian]
+对称二阶张量 $h$ 上的 Lichnerowicz Laplacian 常写为
+\[
+  (\Delta_L h)_{ij}
+  =\Delta h_{ij}+2R_{ikj\ell}h^{k\ell}-R_i{}^k h_{kj}-R_j{}^k h_{ik}.
+\]
+Ricci 张量的演化可理解为热扩散项加曲率二次项。实际估计中，标量曲率方程和 Ricci 张量的张量最大值原理尤其重要。
+\end{rmk}
+
+\section{抛物最大值原理及其应用}
+
+最大值原理是 Ricci flow 中最基本的先验估计工具。直观上，若函数在某时刻某点达到空间最小值，则该点满足
+\[
+  \nabla u=0,
+  \qquad \Delta u\ge 0.
+\]
+因此若 $u$ 满足 $\partial_tu\ge \Delta u$，空间最小值不会下降。
+
+\begin{lem}[带漂移项的抛物最大值原理]\label{lem:max-principle}
+设 $M$ 为闭流形，$g(t)$ 为 $t\in[\alpha,\omega]$ 上的一族光滑度量。若
+\[
+  u:M\times[\alpha,\omega]\to\mathbb R
+\]
+满足
+\begin{equation}\label{eq:max-drift}
+  \partial_t u\ge \Delta_{g(t)}u+X(t)\cdot\nabla u,
+\end{equation}
+其中 $X(t)$ 是时间依赖向量场，并且 $u(\cdot,\alpha)\ge c$，则
+\[
+  u(x,t)\ge c,
+  \qquad (x,t)\in M\times[\alpha,\omega].
+\]
+\end{lem}
+
+\begin{proof}
+先设严格不等式成立。若结论不成立，则存在第一次时间 $t_0>\alpha$ 使得 $u$ 在某点 $x_0$ 达到低于 $c$ 的空间最小值。此时 $\nabla u(x_0,t_0)=0$，$\Delta u(x_0,t_0)\ge0$，而第一次穿越给出 $\partial_tu(x_0,t_0)\le0$，与严格不等式矛盾。一般情形对
+\[
+  u_\varepsilon=u+\varepsilon(t-\alpha+1)
+\]
+应用上述论证，再令 $\varepsilon\downarrow0$ 即可。
+\end{proof}
+
+\begin{cor}[标量曲率下界保持]
+若 $g(t)$ 是闭流形上的 Ricci flow，且 $R(\cdot,0)\ge c$，则在存在时间内
+\[
+  R(\cdot,t)\ge c
+\]
+当 $c\ge0$ 时成立。更精细地，由
+\[
+  \partial_tR=\Delta R+2\norm{\Ric}^2
+  \ge \Delta R+\frac{2}{n}R^2
+\]
+可知若 $R(\cdot,0)\ge c$，则
+\begin{equation}\label{eq:R-lower-ODE}
+  R(x,t)\ge \frac{c}{1-\frac{2c}{n}t}
+\end{equation}
+只要右端有意义。特别地，若 $c<0$，则
+\[
+  R(x,t)\ge -\frac{n}{2t+C}
+\]
+形式的下界也可由相应 ODE 比较得到。
+\end{cor}
+
+\begin{proof}
+不等式 $\norm{\Ric}^2\ge \frac1nR^2$ 来自 Cauchy--Schwarz：对 Ricci 张量的特征值 $\lambda_i$，
+\[
+  \sum_i\lambda_i^2\ge\frac1n\left(\sum_i\lambda_i\right)^2.
+\]
+令 $U(t)$ 解 ODE
+\[
+  U'=\frac{2}{n}U^2,
+  \qquad U(0)=c,
+\]
+则 $U(t)=c/(1-2ct/n)$。对 $R-U$ 应用最大值原理即得 \eqref{eq:R-lower-ODE}。
+\end{proof}
+
+\section{Hamilton 三维正 Ricci 曲率定理的证明框架}
+
+Hamilton 1982 年的基本定理可表述为：
+
+\begin{thm}[Hamilton]
+设 $(M^3,g_0)$ 为闭三维 Riemannian 流形，且 $\Ric_{g_0}>0$。则归一化 Ricci flow 长时间存在，并且当 $t\to\infty$ 时，$g(t)$ 光滑收敛到常正截面曲率度量。因此 $M^3$ 承认球面空间形式结构。
+\end{thm}
+
+下面只整理课堂笔记中的证明主线，而非完整证明。
+
+\subsection{常截面曲率与 Einstein 条件}
+
+在三维中，常截面曲率等价于
+\begin{equation}\label{eq:constant-curv-ric}
+  \Ric=\frac13 Rg
+\end{equation}
+并且由 contracted second Bianchi identity
+\[
+  \divg(\Ric)=\frac12 dR
+\]
+可得：若 $\Ric=\frac13Rg$，则
+\[
+  \frac12 dR=\divg(\Ric)=\divg\left(\frac13 Rg\right)=\frac13 dR,
+\]
+所以 $dR=0$，即 $R$ 为常数。因此三维中趋向常正截面曲率可理解为趋向
+\[
+  \Ric-\frac13 Rg=0.
+\]
+
+\subsection{Ricci 正性与张量最大值原理}
+
+Ricci 张量满足
+\begin{equation}\label{eq:Ric-evol-Q}
+  \partial_t R_{ij}=\Delta R_{ij}+Q_{ij}(\Rm).
+\end{equation}
+Hamilton 的张量最大值原理说明：若二次项 $Q$ 满足所谓 null-eigenvector condition，即当 $R_{ij}V^j=0$ 时
+\[
+  Q_{ij}V^iV^j\ge0,
+\]
+则半正定性 $\Ric\ge0$ 在 Ricci flow 下保持。三维中 Ricci 曲率的演化方程满足这一结构，因此若初始 $\Ric>0$，则沿流保持 $\Ric>0$。
+
+更强地，由闭性与 $\Ric(g_0)>0$，存在 $\delta>0$ 使得
+\begin{equation}\label{eq:pinching}
+  \Ric(g_0)\ge \delta R(g_0)g_0.
+\end{equation}
+为了保持这种 pinching，定义
+\[
+  P_{ij}=R_{ij}-\delta R g_{ij}.
+\]
+若能证明 $P\ge0$ 被演化保持，就得到
+\[
+  \Ric(g(t))\ge \delta R(g(t))g(t).
+\]
+注意由取迹可知 $\delta\le1/3$。
+
+\subsection{尺度不变量与圆化估计}
+
+三维中，距离常曲率的自然量是 trace-free Ricci 张量
+\[
+  E_{ij}:=R_{ij}-\frac13 Rg_{ij}.
+\]
+若 $E\equiv0$，则度量为 Einstein，三维中进一步推出常截面曲率。由于缩放 $g\mapsto cg$ 时
+\[
+  \norm{E}_{cg}^2=c^{-2}\norm{E}_g^2,
+  \qquad R_{cg}=c^{-1}R_g,
+\]
+比值
+\begin{equation}\label{eq:G-scale-invariant}
+  G(g):=\frac{\norm{\Ric-\frac13Rg}^2}{R^2}
+\end{equation}
+是尺度不变的。证明圆化的目标是说明 $G\to0$。
+
+课堂笔记中引入了更强的量：对小的 $\varepsilon>0$，定义
+\begin{equation}\label{eq:Eepsilon}
+  F_\varepsilon(g):=\frac{\norm{\Ric-\frac13Rg}^2}{R^{2-\varepsilon}}.
+\end{equation}
+因为 $R\to\infty$ 时，若 $F_\varepsilon$ 有界，则
+\[
+  \frac{\norm{\Ric-\frac13Rg}^2}{R^2}
+  =F_\varepsilon R^{-\varepsilon}\to0.
+\]
+这正是 $G\to0$。
+
+Hamilton 的 pinching estimate 可表述为：若 $(M^3,g_0)$ 闭且 $\Ric(g_0)>0$，则存在 $\varepsilon>0$ 与常数 $C=C(g_0,\varepsilon)$，使得沿非归一化 Ricci flow 有
+\begin{equation}\label{eq:Hamilton-pinching}
+  \frac{\norm{\Ric-\frac13Rg}^2}{R^{2-\varepsilon}}
+  \le C.
+\end{equation}
+证明核心是计算 $F_\varepsilon$ 的演化方程。其结构为
+\begin{equation}\label{eq:Feps-evol-schematic}
+  \partial_t F_\varepsilon
+  \le \Delta F_\varepsilon
+  +\frac{2(1-\varepsilon)}{R}\inner{\nabla R}{\nabla F_\varepsilon}
+  +\text{nonpositive gradient terms}
+  +\text{algebraic terms}.
+\end{equation}
+在 pinching 条件 $\Ric\ge\delta Rg$ 下，代数项可由纯代数不等式控制；若 $\varepsilon\le2\delta^2$，则得到
+\[
+  \partial_t F_\varepsilon
+  \le \Delta F_\varepsilon+X(t)\cdot\nabla F_\varepsilon.
+\]
+由带漂移项的最大值原理，$F_\varepsilon$ 保持有界，即得 \eqref{eq:Hamilton-pinching}。
+
+\subsection{归一化流与收敛}
+
+三维归一化 Ricci flow 为
+\begin{equation}\label{eq:NRF3}
+  \partial_t g=-2\Ric+\frac23 r g,
+  \qquad
+  r(t)=\frac{\int_M R\,dV_g}{\int_M dV_g}.
+\end{equation}
+由体积变分公式可验证其保持体积：
+\[
+  \frac{d}{dt}\Vol(M,g(t))
+  =\int_M\frac12\tr_g\left(-2\Ric+\frac23rg\right)dV_g
+  =\int_M(-R+r)dV_g=0.
+\]
+Hamilton 证明归一化流长时间存在，并且在 $\Ric>0$ 条件下，结合 pinching estimate 与高阶估计，可得
+\[
+  g(t)\longrightarrow g_\infty
+  \qquad\text{in }C^\infty,
+\]
+其中 $g_\infty$ 具有常正截面曲率。
+
+\subsection{Cheeger--Gromov 收敛观点}
+
+若非归一化 Ricci flow 在有限时间 $T$ 发生收缩奇性，可取 $t_i\nearrow T$，并选择点 $x_i\in M$ 使
+\[
+  R_i:=R(x_i,t_i)=\max_{x\in M}R(x,t_i).
+\]
+考虑重尺度度量
+\[
+  \tilde g_i:=R_i g(t_i).
+\]
+则 $\tilde g_i$ 在 $x_i$ 处标量曲率为 $1$，并且全局标量曲率不超过 $1$。若有曲率和非塌缩控制，则由 pointed Cheeger--Gromov 紧性定理可取子列
+\[
+  (M,\tilde g_i,x_i)\longrightarrow (M_\infty,g_\infty,x_\infty)
+\]
+在 pointed $C^\infty$ 意义下收敛。课堂笔记中的思路是：利用 pinching estimate 证明极限具有常正截面曲率，再进一步推出极限紧致且与原流形微分同胚，从而得到圆化结论。
+
+\section{若干计算与学习建议}
+
+\begin{enumerate}[label=\textup{(\arabic*)}]
+  \item Ricci flow 的计算应优先掌握三个公式：联络变分公式 \eqref{eq:connection-var}、体积元变分公式 \eqref{eq:volume-var}、标量曲率演化公式 \eqref{eq:scalar-evol}。
+  \item 最大值原理不仅适用于标量方程，也通过 Hamilton 的张量最大值原理适用于曲率算子的锥条件，例如 $\Ric\ge0$ 或 pinching 条件。
+  \item ``Ricci 张量是度量的 Laplacian'' 只是启发式说法。由于微分同胚不变性，不能直接把 Ricci flow 当作坐标分量上的普通热方程；严格抛物性需要 DeTurck trick。
+  \item 三维正 Ricci 曲率定理的核心结构是
+  \[
+    \text{正性保持}\quad+\quad\text{pinching estimate}\quad+\quad\text{归一化与紧性}\quad\Longrightarrow\quad\text{常正截面曲率极限}.
+  \]
+\end{enumerate}
+\bibliographystyle{amsplain}
+\bibliography{ricci_flow_notes}
+\end{document}
