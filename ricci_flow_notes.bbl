@@ -1,0 +1,204 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global/global}
+  \entry{ChowLuNi2006}{book}{}{}
+    \name{author}{3}{}{%
+      {{hash=CB}{%
+         family={Chow},
+         familyi={C\bibinitperiod},
+         given={Bennett},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=LP}{%
+         family={Lu},
+         familyi={L\bibinitperiod},
+         given={Peng},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=NL}{%
+         family={Ni},
+         familyi={N\bibinitperiod},
+         given={Lei},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {American Mathematical Society, Providence, RI; Science Press, New York}%
+    }
+    \strng{namehash}{CBLPNL1}
+    \strng{fullhash}{CBLPNL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{doi}
+    \verb 10.1090/gsm/077
+    \endverb
+    \field{isbn}{978-0-8218-4231-7; 0-8218-4231-5}
+    \field{pages}{xxxvi+608}
+    \field{series}{Graduate Studies in Mathematics}
+    \field{title}{Hamilton's {R}icci flow}
+    \verb{url}
+    \verb https://doi.org/10.1090/gsm/077
+    \endverb
+    \field{volume}{77}
+    \field{year}{2006}
+  \endentry
+
+  \entry{DeTurck1983}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=DDM}{%
+         family={DeTurck},
+         familyi={D\bibinitperiod},
+         given={Dennis\bibnamedelima M.},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DDM1}
+    \strng{fullhash}{DDM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{issn}{0022-040X,1945-743X}
+    \field{number}{1}
+    \field{pages}{157\bibrangedash 162}
+    \field{title}{Deforming metrics in the direction of their {R}icci tensors}
+    \verb{url}
+    \verb http://projecteuclid.org/euclid.jdg/1214509286
+    \endverb
+    \field{volume}{18}
+    \field{journaltitle}{J. Differential Geom.}
+    \field{year}{1983}
+  \endentry
+
+  \entry{Hamilton1995Compactness}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=HRS}{%
+         family={Hamilton},
+         familyi={H\bibinitperiod},
+         given={Richard\bibnamedelima S.},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HRS1}
+    \strng{fullhash}{HRS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \verb{doi}
+    \verb 10.2307/2375070
+    \endverb
+    \field{issn}{0002-9327,1080-6377}
+    \field{number}{3}
+    \field{pages}{545\bibrangedash 572}
+    \field{title}{A compactness property for solutions of the {R}icci flow}
+    \verb{url}
+    \verb https://doi.org/10.2307/2375070
+    \endverb
+    \field{volume}{117}
+    \field{journaltitle}{Amer. J. Math.}
+    \field{year}{1995}
+  \endentry
+
+  \entry{Hamilton1982}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=HRS}{%
+         family={Hamilton},
+         familyi={H\bibinitperiod},
+         given={Richard\bibnamedelima S.},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HRS1}
+    \strng{fullhash}{HRS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{issn}{0022-040X,1945-743X}
+    \field{number}{2}
+    \field{pages}{255\bibrangedash 306}
+    \field{title}{Three-manifolds with positive {R}icci curvature}
+    \verb{url}
+    \verb http://projecteuclid.org/euclid.jdg/1214436922
+    \endverb
+    \field{volume}{17}
+    \field{journaltitle}{J. Differential Geometry}
+    \field{year}{1982}
+  \endentry
+
+  \entry{Perelman2002}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=PG}{%
+         family={Perelman},
+         familyi={P\bibinitperiod},
+         given={Grisha},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{PG1}
+    \strng{fullhash}{PG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \verb{eprint}
+    \verb math/0211159
+    \endverb
+    \field{pages}{math/0211159}
+    \field{title}{The entropy formula for the {R}icci flow and its geometric
+  applications}
+    \verb{url}
+    \verb https://arxiv.org/abs/math/0211159
+    \endverb
+    \field{journaltitle}{arXiv Mathematics e-prints}
+    \field{eprinttype}{arXiv}
+    \field{year}{2002}
+  \endentry
+
+  \entry{Shi1989}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=SWX}{%
+         family={Shi},
+         familyi={S\bibinitperiod},
+         given={Wan-Xiong},
+         giveni={W\bibinithyphendelim X\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SWX1}
+    \strng{fullhash}{SWX1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{issn}{0022-040X,1945-743X}
+    \field{number}{1}
+    \field{pages}{223\bibrangedash 301}
+    \field{title}{Deforming the metric on complete {R}iemannian manifolds}
+    \verb{url}
+    \verb http://projecteuclid.org/euclid.jdg/1214443292
+    \endverb
+    \field{volume}{30}
+    \field{journaltitle}{J. Differential Geom.}
+    \field{year}{1989}
+  \endentry
+\enddatalist
+\endinput
